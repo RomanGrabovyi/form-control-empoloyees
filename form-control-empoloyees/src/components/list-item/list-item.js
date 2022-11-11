@@ -1,11 +1,9 @@
-import { useState } from 'react';
+
 
 import '../list-item/list-item.css'
 
-const ListItem = ({name, salary, removeEmployee}) => {
+const ListItem = ({name, salary, increase, rise, removeEmployee, onToggleIncrease, onToggleRise}) => {
 
-    const [increase, setIncrease] = useState(false);
-    const [rise, setRise] = useState(false)
 
     let classNames = "list-group-item d-flex justify-content-between";
     if (increase) {
@@ -16,26 +14,18 @@ const ListItem = ({name, salary, removeEmployee}) => {
         classNames += ' like'
     }
 
-    const onIncrease = () => {
-        setIncrease(!increase)
-    }
-
-    const onRise = () => {
-        setRise(!rise)
-        console.log(rise)
-    }
     
     return (
 
         <li className={classNames}>
             <span 
-                onClick={onRise} 
+                onClick={onToggleRise} 
                 className="list-group-item-label"
                 >{name}</span>
             <input type="text" className="list-group-item-input" defaultValue={salary}/>
             <div className='d-flex justify-content-center align-items-center'>
                 <button type="button"
-                        onClick={onIncrease}
+                        onClick={onToggleIncrease}
                         className="btn-cookie btn-sm ">
                     <i className="fas fa-cookie"></i>
                 </button>

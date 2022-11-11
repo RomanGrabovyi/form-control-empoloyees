@@ -3,16 +3,16 @@ import nextId from 'react-id-generator';
 import '../form/form.css'
 
 const Form = ({addEmployee}) => {
-    const [emoployee, setEployee] = useState({name: '',salary: ''});
+    const [emoployee, setEployee] = useState({name: '',salary: '', increase: false, rise: false});
 
     const itemId = nextId();
     const addNewItem = (e) => {
         e.preventDefault();
+        if(emoployee.name.length < 3) return
         const newEmployee = {
             ...emoployee, id: itemId
         }
         
-        console.log(itemId)
         addEmployee(newEmployee);
         setEployee({name: '', salary: ''})
       }
