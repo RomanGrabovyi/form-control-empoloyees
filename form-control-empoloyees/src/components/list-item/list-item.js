@@ -1,8 +1,8 @@
 
-
+import { useState } from 'react';
 import '../list-item/list-item.css'
 
-const ListItem = ({name, salary, increase, rise, removeEmployee, onToggleIncrease, onToggleRise}) => {
+const ListItem = ({name, increase, rise, removeEmployee, onToggleIncrease, onToggleRise, onChangeSalary}) => {
 
 
     let classNames = "list-group-item d-flex justify-content-between";
@@ -13,8 +13,13 @@ const ListItem = ({name, salary, increase, rise, removeEmployee, onToggleIncreas
     if(rise) {
         classNames += ' like'
     }
+    const [salary, setSalary] = useState('200');
 
-    
+    const onSalary = (e) => {
+        setSalary(e.target.value);
+        onChangeSalary(name, e.target.value)
+    }
+
     return (
 
         <li className={classNames}>
@@ -22,7 +27,11 @@ const ListItem = ({name, salary, increase, rise, removeEmployee, onToggleIncreas
                 onClick={onToggleRise} 
                 className="list-group-item-label"
                 >{name}</span>
-            <input type="text" className="list-group-item-input" defaultValue={salary}/>
+            <input 
+                type="number" 
+                className="list-group-item-input" 
+                value={salary}
+                onChange={onSalary}/>
             <div className='d-flex justify-content-center align-items-center'>
                 <button type="button"
                         onClick={onToggleIncrease}

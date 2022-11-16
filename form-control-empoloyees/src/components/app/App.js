@@ -13,9 +13,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App () {
   const [employees, setEmployees] = useState ([
-    {id: 1, name: 'John C', salary: 100, increase: false, rise: true},
-    {id: 2, name: 'Alex H', salary: 800, increase: false, rise: false},
-    {id: 3, name: 'Peter D', salary: 2000, increase: false, rise: false}
+    {id: 1, name: 'John C', salary: '100', increase: false, rise: true},
+    {id: 2, name: 'Alex H', salary: '200', increase: false, rise: false},
+    {id: 3, name: 'Peter D', salary: '1000', increase: false, rise: false}
   ]);
 
   const [term, setTerm] = useState('');
@@ -24,6 +24,17 @@ function App () {
   const onAddEmployee = (newEmployee) => {
     setEmployees([...employees, newEmployee])
   }
+
+  const onChangeSalary = (name, salary) => {
+    setEmployees(
+        employees.map(item => {
+            if(item.name === name) {
+                return {...item, salary}
+            }
+            return item;
+        }))
+        
+}
 
   const removeEmployee = (id) => {
     setEmployees(employees.filter(item => item.id !== id))
@@ -85,7 +96,7 @@ function App () {
           empl={empl} 
           rise={rise}/>
       <div className="search-panel">
-        <SearchPanel onUpdateSearch={onUpdateSearch}/>
+        <SearchPanel onSearch={onUpdateSearch}/>
         <Filter filter={filter}
                 onFilterSelect={onFilterSelect}/>
       </div>
@@ -93,7 +104,8 @@ function App () {
           removeEmployee={removeEmployee} 
           employees={visibleEmpl}
           onToggleIncrease={onToggleIncrease}
-          onToggleRise={onToggleRise}/>
+          onToggleRise={onToggleRise}
+          onChangeSalary={onChangeSalary}/>
       <Form addEmployee={onAddEmployee}/>
     </div>
   );

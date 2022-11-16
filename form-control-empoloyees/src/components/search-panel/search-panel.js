@@ -2,13 +2,13 @@ import { useState } from 'react'
 
 import '../search-panel/search-panel.css'
 
-const SearchPanel = (props) => {
+const SearchPanel = ({onSearch}) => {
     const [term, setTerm] = useState('')
 
     const onUpdateSearch = (e) => {
         const term = e.target.value;
         setTerm(term);
-        props.onUpdateSearch(term)
+        onSearch(term)
     }
     return (
         <div>
